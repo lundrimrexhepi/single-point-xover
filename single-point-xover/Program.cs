@@ -3,20 +3,21 @@
 var P1 = "1234552";
 
 var P2 = "1111987";
+twopointxover(P1, P2);
 
-
-for (int i = 0; i < 5; i++)
-{
-    Console.WriteLine("Generation " + i + " :");
-    xover(P1, P2);
-}
+//for (int i = 0; i < 5; i++)
+//{
+//    Console.WriteLine("Generation " + i + " :");
+//    //xover(P1, P2);
+//    twopointxover(P1,P2);
+//}
 
 Console.ReadLine();
 
 void xover (string p1, string p2)
 {
     var rand = new Random();
-    var randomPoint = rand.Next(0, Math.Max(P1.Length, P2.Length));
+    var randomPoint = rand.Next(0, Math.Max(p1.Length, p2.Length));
 
     Console.WriteLine("Crossover point is : " + randomPoint);
 
@@ -26,4 +27,43 @@ void xover (string p1, string p2)
 
     Console.WriteLine(C1 + "\n");
     Console.WriteLine(C2 + "\n");
+}
+
+void twopointxover (string p1, string p2)
+    {
+    var rand = new Random();
+    var j = rand.Next(1, Math.Max(p1.Length, p2.Length));
+    var k = rand.Next(j, Math.Max(p1.Length, p2.Length));
+
+    while (j==k)
+    {
+        if(j== Math.Max(p1.Length, p2.Length)-1)
+        {
+            j = rand.Next(1, Math.Max(p1.Length, p2.Length));
+            k = rand.Next(j, Math.Max(p1.Length, p2.Length));
+        }
+        else
+        {
+            k = rand.Next(j, Math.Max(p1.Length, p2.Length));
+        }
+        
+    }
+
+    Console.WriteLine("Parent P1 : " + p1);
+
+    Console.WriteLine("Parent P2 : " + p2);
+
+
+    Console.WriteLine("First crossover point is : " + j);
+
+    Console.WriteLine("Second crossover point is : " + k);
+
+    var a = p1.Substring(0, j);
+    var b = p2.Substring(j,k-j);
+    var c = p1.Substring(k);
+
+    var Child = a+b+c;
+
+    Console.WriteLine(Child);
+
 }
